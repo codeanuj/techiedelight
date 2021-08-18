@@ -19,6 +19,7 @@ class GFG {
 	          
 	          while(freq!=0){
 	              System.out.println(A[i]);
+			  freq--;
 	          }
 	          
 	          map.remove(A[i]);
