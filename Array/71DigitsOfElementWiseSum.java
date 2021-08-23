@@ -52,4 +52,52 @@ public class MyClass {
      System.out.println(list);
      
     }
+    
+    
+    
+    ///////////////////////////////////////////////
+    
+      public static void add(int[] a, int[] b, List<Integer> result)
+    {
+        int m = a.length, n = b.length;
+        String str = "";
+ 
+        // loop till either `a` or `b` runs out
+        int i = 0;
+        while (i < m && i < n)
+        {
+            str += (a[i] + b[i]);
+            i++;
+        }
+ 
+        // process remaining elements of the first list, if any
+        while (i < m) {
+            str += (a[i++]);
+        }
+ 
+        // process remaining elements of the second list, if any
+        while (i < n) {
+            str += (b[i++]);
+        }
+ 
+        // add characters of the output string to a given list of integers
+        char[] chars = str.toCharArray();
+        for (char c: chars) {
+            result.add(c - '0');
+        }
+    }
+ 
+    public static void main(String[] args)
+    {
+        // input lists
+        int[] a = { };
+        int[] b = { 4, 67, 2, 8 };
+ 
+        // list to store the output
+        List<Integer> result = new ArrayList<>();
+        add(a, b, result);
+ 
+        // print the output list
+        System.out.print(result);
+    }
 }
