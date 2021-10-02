@@ -1,26 +1,41 @@
- public Node connect(Node root) {
+public void connect(Node root)
+    {
+
+        Node temp_v=root;
         
-        if(root==null) return root;
-        
-        Queue<Node> q =new LinkedList<Node>();       
-        q.add(root);
-        int size=0;
-        Node node=null;
-        
-        while(!q.isEmpty()){
-           size=q.size();
-           
-            for(int i=0; i<size; i++){
-                node=q.poll();
-                if(node.left!=null) q.add(node.left);
-                if(node.right!=null) q.add(node.right);
+        while(temp_v!=null){
+            Node temp_h=temp_v;
+            while(temp_h!=null){
                 
-                if(i==size-1)
-                    node.next=null;
-                else
-                    node.next=q.peek();
+                if(temp_h.left!=null){
+                    if(temp_h.right!=null){
+                        temp_h.left.nextRight=temp_h.right;
+                    }else{
+                        temp_h.left.nextRight=getNextRight(temp_h.nextRight);
+                    }
+                }
+                if(temp_h.right!=null){
+                    temp_h.right.nextRight=getNextRight(temp_h.nextRight);
+                }
+                
+                temp_h=temp_h.nextRight;
+            }
+            
+            if(temp_v.left!=null){
+                temp_v=temp_v.left;
+            }else if(temp_v.right!=null){
+                temp_v=temp_v.right;
+            }else{
+                temp_v=temp_v.nextRight;
             }
         }
         
-        return root;
+     }
+    
+     public Node getNextRight(Node curr){
+        if(curr==null) return curr;
+        if(curr.left!=null) return curr.left;
+        if(curr.right!=null) return curr.right;
+        Node n=getNextRight(curr.nextRight);
+        return n;
     }
